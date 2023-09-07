@@ -7,9 +7,19 @@ metadata:
     k8s-app: traefik-ingress-controller
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      k8s-app: traefik-ingress-controller
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: k8s-app
+            operator: In
+            values:
+            - traefik-ingress-controller              
+  
+ # selector:
+ #   matchLabels:
+ #     k8s-app: traefik-ingress-controller
   template:
     metadata:
       labels:
