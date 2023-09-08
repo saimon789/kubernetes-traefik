@@ -25,6 +25,12 @@ spec:
         - name: traefik-ingress-configmap
           configMap:
             name: traefik-ingress-configmap
+        - name: test-volume
+          hostPath:
+        # directory location on host
+            path: /data
+        # this field is optional
+            type: DirectoryOrCreate
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -65,6 +71,9 @@ spec:
             name: "traefik-ui-tls-cert"
           - mountPath: "/config"
             name: "traefik-ingress-configmap"
+          - mountPath: /test-pd
+            name: test-volume
+         
         ports:
         - name: http
           containerPort: 80
@@ -72,6 +81,7 @@ spec:
           containerPort: 443
         - name: dashboard
           containerPort: 8080
+          hostPort: 8080
         args:
         - --logLevel=INFO
         - --configfile=/config/traefik.toml

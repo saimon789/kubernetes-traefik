@@ -22,7 +22,7 @@ data:
       [entryPoints.traefik]
         address = ":8080"
         [entryPoints.traefik.auth.basic]
-        users = ["admin:$apr1$imdkeZCP$Kp78/ikmqeoNsnV.L5xjC1"]
+        users = ["admin:$apr1$/JzrvyQJ$gogPc9rFntJ4Ve3k/DWbj."]
 
     [kubernetes]
       [kubernetes.ingressEndpoint]
